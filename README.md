@@ -1,4 +1,5 @@
 **Market Breadth, Correlation and Concentration**
+
 The goal of this project was to create a Streamlit dashboard that tests whether
 narrow market breadth leads to higher cross-sector correlation and higher future 
 volatility in the S&P 500.
@@ -6,10 +7,12 @@ volatility in the S&P 500.
 Dashboard: https://market-breadth-cmqffdpng2jmebxzionmwt.streamlit.app/
 
 **Question**
+
 When fewer stocks participate in the index's gains, do correlation and the volatility 
 that follows tend to rise?
 
 **Findings**
+
 My findings are based on the default controls: 200-day breadth, 63-day correlation, 
 21-day forward volatility, and 2015-01-01 as the start date.
 
@@ -24,6 +27,7 @@ sector correlation is 0.13, and the equal weight RSP has underperformed the cap-
 SPY by ~29% since 2015.
 
 **Data**
+
 -Ticker data is retrieved from the yfinance Python library which is Yahoo Finance.
 -Breadth uses a set list of current S&P 500 members.
 -Correlation uses the 11 SPDR sector ETFs.
@@ -31,6 +35,7 @@ SPY by ~29% since 2015.
 -2s/10s Treasury spread is downloaded as a csv from FRED.
 
 **Limitations**
+
 -Forward vol windows overlap from day to day which overstates the R^2 value.
 -Using todays members for the full history introduces survivorship bias and likely raises
 the historical breadth.
