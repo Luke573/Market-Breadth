@@ -6,6 +6,26 @@ import streamlit as st
 import main as M
 import breadth as B
 
+st.markdown(
+    """
+    <style>
+        header[data-testid="stHeader"] {display: none !important;}
+        .block-container {
+            padding-top: 0rem !important;
+            padding-bottom: 0rem !important;
+            margin-top: -2rem !important;}
+
+        div[data-testid="stVerticalBlock"] > div:first-child {
+            margin-top: 0rem !important;
+            padding-top: 0rem !important;}
+
+        h1 {
+            padding-top: 0.2rem !important;
+            margin-top: 0rem !important;
+            margin-bottom: 0.1rem !important;}
+    </style>
+    """,unsafe_allow_html=True,)
+
 st.set_page_config(page_title="Breadth · Correlation · Concentration", layout="wide", initial_sidebar_state="expanded")
 
 # theme
