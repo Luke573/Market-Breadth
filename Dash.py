@@ -16,7 +16,7 @@ st.markdown(
             z-index: 100 !important;}
 
         .block-container {
-            padding-top: 2.2rem !important;  /* Clears just enough room for the header icons */
+            padding-top: 2.2rem !important; 
             padding-bottom: 0rem !important;
             padding-left: 2rem !important;
             padding-right: 2rem !important;}
