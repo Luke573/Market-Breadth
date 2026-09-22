@@ -9,7 +9,7 @@ import breadth as B
 st.set_page_config(page_title="Breadth · Correlation · Concentration", layout="wide", initial_sidebar_state="expanded")
 
 # theme
-base = dict(template="plotly_dark", margin=dict(l=45, r=25, t=55, b=40),
+base = dict(template="plotly_dark", margin=dict(l=35, r=20, t=32, b=25),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             font=dict(size=10), hovermode="x unified")
 
