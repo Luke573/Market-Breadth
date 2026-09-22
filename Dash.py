@@ -12,7 +12,7 @@ st.set_page_config(page_title="Breadth · Correlation · Concentration", layout=
 base = dict(template="plotly_dark", margin=dict(l=35, r=20, t=32, b=25),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             font=dict(size=10), hovermode="x unified")
-
+st.markdown("""<style>.stApp { zoom: 0.9; }</style>""", unsafe_allow_html=True)
 
 # colors
 accent, warm, green, red, grey = "#4C8BF5", "#E8833A", "#3FB950", "#E5534B", "#8B949E"
