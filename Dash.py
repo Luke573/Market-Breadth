@@ -110,7 +110,6 @@ with tabs[0]:
                            height=260, legend=dict(x=0.02, y=0.98), **base)
         st.plotly_chart(fyld, use_container_width=True)
 
-    st.write("")
 
     # spy/qqq side by side with the 2/10s spread
     left_2, right_2 = st.columns(2)
