@@ -13,7 +13,7 @@ st.markdown(
         .block-container {
             padding-top: 0rem !important;
             padding-bottom: 0rem !important;
-            margin-top: -2rem !important;}
+            margin-top: 0rem !important;}
 
         div[data-testid="stVerticalBlock"] > div:first-child {
             margin-top: 0rem !important;
