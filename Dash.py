@@ -6,25 +6,37 @@ import streamlit as st
 import main as M
 import breadth as B
 
+## set margin changes to have app mimic the localhost layout
 st.markdown(
     """
     <style>
-        header[data-testid="stHeader"] {display: none !important;}
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+            height: 2.5rem !important;
+            z-index: 100 !important;}
+
         .block-container {
-            padding-top: 0rem !important;
+            padding-top: 2.2rem !important;  /* Clears just enough room for the header icons */
             padding-bottom: 0rem !important;
-            margin-top: 0rem !important;}
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;}
 
-        div[data-testid="stVerticalBlock"] > div:first-child {
-            margin-top: 0rem !important;
-            padding-top: 0rem !important;}
+        div[data-testid="stVerticalBlock"] > div {
+            gap: 0.35rem !important;}
 
+        div[data-testid="stMetric"] {
+            padding: 2px 0px !important;}
+        div[data-testid="stMetricValue"] {
+            font-size: 1.6rem !important;}
+            
         h1 {
-            padding-top: 0.2rem !important;
+            font-size: 1.65rem !important;
             margin-top: 0rem !important;
-            margin-bottom: 0.1rem !important;}
-    </style>
-    """,unsafe_allow_html=True,)
+            margin-bottom: 0.1rem !important;
+            padding-top: 0rem !important;}
+        p, .stCaption {
+            margin-bottom: 0.2rem !important;}
+    </style>""",unsafe_allow_html=True,)
 
 st.set_page_config(page_title="Breadth · Correlation · Concentration", layout="wide", initial_sidebar_state="expanded")
 
