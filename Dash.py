@@ -97,7 +97,7 @@ with tabs[0]:
                                 text=[f" {b_now * 100:.0f}%"], textposition="middle right",
                                 textfont=dict(color=warm, size=13), showlegend=False))
         sp.update_layout(title="Breadth since 2015", yaxis_title="% above 200d MA",
-                         yaxis_range=[0, 100], height=260, **base)
+                         yaxis_range=[0, 100], height=220, **base)
         st.plotly_chart(sp, use_container_width=True)
 
     with right_1:
@@ -107,7 +107,7 @@ with tabs[0]:
         fyld.add_trace(go.Scatter(x=yields.index, y=yields["DGS10"], name="10yr",
                                   line=dict(color=warm, width=2)))
         fyld.update_layout(title="2yr and 10yr Treasury yields", yaxis_title="Yield (%)",
-                           height=260, legend=dict(x=0.02, y=0.98), **base)
+                           height=220, legend=dict(x=0.02, y=0.98), **base)
         st.plotly_chart(fyld, use_container_width=True)
 
 
@@ -125,7 +125,7 @@ with tabs[0]:
             fn.add_trace(go.Scatter(x=intr.index, y=intr["QQQ"], name="QQQ",
                                     line=dict(color=warm, width=2)))
             fn.update_layout(title="Today's SPY and QQQ", yaxis_title="Price ($)",
-                             height=260, legend=dict(x=1.02, y=1, xanchor="left"), **base)
+                             height=220, legend=dict(x=1.02, y=1, xanchor="left"), **base)
             st.plotly_chart(fn, use_container_width=True)
 
     with right_2:
@@ -134,7 +134,7 @@ with tabs[0]:
                                 line=dict(color=green, width=2)))
         fy.add_hline(y=0, line=dict(color=grey, width=1, dash="dash"))
         fy.update_layout(title="Yield curve (10y − 2y)", yaxis_title="Spread (%)",
-                         height=260, **base)
+                         height=220, **base)
         st.plotly_chart(fy, use_container_width=True)
 
 
