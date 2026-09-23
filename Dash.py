@@ -171,8 +171,7 @@ with tabs[0]:
     left_2, right_2 = st.columns(2)
 
     with left_2:
-        period = st.radio("Window", ["1d", "5d"], horizontal=True, label_visibility="collapsed")
-        live_chart(period)
+        live_chart("1d")
 
     with right_2:
         fy = go.Figure()
