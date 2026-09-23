@@ -86,10 +86,13 @@ def live_chart(period):
         fn.add_trace(go.Scatter(x=s.index, y=s, name=f"{t} ${s.iloc[-1]:,.2f} ({chg:+.2f}%)",
                                 line=dict(color=col, width=2)), secondary_y=right)
         fn.update_yaxes(tickprefix="$", color=col, showgrid=not right, secondary_y=right)
-    fn.update_xaxes(rangebreaks=[dict(bounds=["sat", "mon"]),
-                                 dict(bounds=[16, 9.5], pattern="hour")])
+    
+    fn.update_xaxes(tickformat="%H:%M", rangebreaks=[dict(bounds=["sat", "mon"]), dict(bounds=[16, 9.5], pattern="hour")])
+    
     fn.update_layout(title=f"SPY and QQQ (last update {intr.index[-1]:%b %d, %H:%M} ET)",
-                     height=240, legend=dict(orientation="h", x=0, y=-0.25), **base)
+                     height=250, legend=dict(orientation="h", x=0, y=-0.18, yanchor="top"), **base)
+    
+    fn.update_layout(margin=dict(l=35, r=20, t=32, b=50))
     st.plotly_chart(fn, use_container_width=True)
 
 # 503-name breadth pull has long ttl because it doesn't need live updates
