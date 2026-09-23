@@ -80,8 +80,8 @@ def load_all_prices(tickers, start="2015-01-01", end=None, ma=200) -> pd.DataFra
     fetch_start = (pd.Timestamp(start) - pd.Timedelta(days=int(ma * 2))).date().isoformat()
     raw = yf.download(list(tickers), start=fetch_start, end=end,
                       auto_adjust=True, progress=False)
-    close = raw["Close"]
-    return close.sort_index()
+    close = raw["Close"].sort_index()
+    return close.dropna(thresh=int(0.9 * close.shape[1]))
 
 
 ## get the 200 day moving average and then figure out which tickers are trading above that
