@@ -64,9 +64,33 @@ def get_prices(tickers, start):
     return M.load_prices(tickers, start=start)
 
 # today's SPY/QQQ with short ttl to show live
-@st.cache_data(ttl="2m", show_spinner=False)
+@st.cache_data(ttl="1m", show_spinner=False)
 def get_intraday(tickers, period, interval):
     return M.daily_prices(tickers, period=period, interval=interval)
+
+# live SPY/QQQ chart that reruns on its own every minute
+@st.fragment(run_every="60s")
+def live_chart(period):
+    interval = "5m" if period == "1d" else "15m"
+    intr = get_intraday(("SPY", "QQQ"), period, interval)
+    if intr.empty or intr.shape[0] < 2:
+        st.info("Intraday data unavailable right now")
+        return
+    if intr.index.tz is not None:
+        intr.index = intr.index.tz_convert("America/New_York").tz_localize(None)
+
+    fn = make_subplots(specs=[[{"secondary_y": True}]])
+    for t, col, right in [("SPY", accent, False), ("QQQ", warm, True)]:
+        s = intr[t].dropna()
+        chg = (s.iloc[-1] / s.iloc[0] - 1) * 100
+        fn.add_trace(go.Scatter(x=s.index, y=s, name=f"{t} ${s.iloc[-1]:,.2f} ({chg:+.2f}%)",
+                                line=dict(color=col, width=2)), secondary_y=right)
+        fn.update_yaxes(tickprefix="$", color=col, showgrid=not right, secondary_y=right)
+    fn.update_xaxes(rangebreaks=[dict(bounds=["sat", "mon"]),
+                                 dict(bounds=[16, 9.5], pattern="hour")])
+    fn.update_layout(title=f"SPY and QQQ (last update {intr.index[-1]:%b %d, %H:%M} ET)",
+                     height=240, legend=dict(orientation="h", x=0, y=-0.25), **base)
+    st.plotly_chart(fn, use_container_width=True)
 
 # 503-name breadth pull has long ttl because it doesn't need live updates
 @st.cache_data(ttl="12h", show_spinner="Pulling S&P 500 members…")
@@ -147,18 +171,8 @@ with tabs[0]:
     left_2, right_2 = st.columns(2)
 
     with left_2:
-        intr = get_intraday(("SPY", "QQQ"), "1d", "5m")
-        if intr.empty or intr.shape[0] < 2:
-            st.info("Intraday data unavailable right now")
-        else:
-            fn = go.Figure()
-            fn.add_trace(go.Scatter(x=intr.index, y=intr["SPY"], name="SPY",
-                                    line=dict(color=accent, width=2)))
-            fn.add_trace(go.Scatter(x=intr.index, y=intr["QQQ"], name="QQQ",
-                                    line=dict(color=warm, width=2)))
-            fn.update_layout(title="Today's SPY and QQQ", yaxis_title="Price ($)",
-                             height=220, legend=dict(x=1.02, y=1, xanchor="left"), **base)
-            st.plotly_chart(fn, use_container_width=True)
+        period = st.radio("Window", ["1d", "5d"], horizontal=True, label_visibility="collapsed")
+        live_chart(period)
 
     with right_2:
         fy = go.Figure()
