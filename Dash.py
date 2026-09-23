@@ -85,7 +85,7 @@ def live_chart(period):
         chg = (s.iloc[-1] / s.iloc[0] - 1) * 100
         fn.add_trace(go.Scatter(x=s.index, y=s, name=f"{t} ${s.iloc[-1]:,.2f} ({chg:+.2f}%)",
                                 line=dict(color=col, width=2)), secondary_y=right)
-        fn.update_yaxes(tickprefix="$", color=col, showgrid=not right, secondary_y=right)
+        fn.update_yaxes(title_text=t, tickprefix="$", color=col, showgrid=not right, secondary_y=right)
     
     fn.update_xaxes(tickformat="%H:%M", rangebreaks=[dict(bounds=["sat", "mon"]), dict(bounds=[16, 9.5], pattern="hour")])
     
